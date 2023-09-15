@@ -1,0 +1,19 @@
+trigger:
+- '*'
+
+jobs:
+- job: Build
+  displayName: 'Build Job'
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+  - task: UseJavaVersion@0
+    inputs:
+      versionSpec: '8'
+      jdkArchitectureOption: 'x64'
+      addToPath: true
+
+  - script: |
+      mvn clean install
+    displayName: 'Build with Maven'
+
